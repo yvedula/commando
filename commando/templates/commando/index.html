@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Command(O)</title>
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+</p>
+{% endfor %}
+
+<p>
+Current todo list:
+
+<table>
+	<tr>
+		<th> Category </th>
+		<th> Command </th>
+		<th> Description </th>
+	</tr>
+
+	{% for item in items %}
+		<tr> 
+			<td> {{item.category}} </td>
+			<td> {{item.command}} </td>
+			<td> {{item.description}} </td>
+		</tr>
+	{% endfor %}
+</table>
+
+</p>
+
+<form action="/commando/add-item" method="post">
+  Category: <input type="text" name="category">
+  Command: <input type="text" name="command">
+  Description: <input type="text" name="description">
+               <input type="submit" text="Add item">
+  {% csrf_token %}
+</form>
+
+</body>
+</html>
+
